@@ -10,11 +10,16 @@ public:
     virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
     void applyForce(glm::vec2 force);
     void applyForceToActor(Rigidbody* actor2, glm::vec2 force);
+    void resolveCollision(Rigidbody* actor2);
+    float getKineticEnergy();
+    float getPotentialEnergy(); 
 
     glm::vec2 getPosition() { return m_position; }
     float getOrientatation() { return m_orientation; }
     glm::vec2 getVelocity() { return m_velocity; }
     float getMass() { return m_mass; }
+
+    glm::vec2 setVelocity(glm::vec2 newVelocity) { return m_velocity = newVelocity; }
 
 protected:
     glm::vec2 m_position;

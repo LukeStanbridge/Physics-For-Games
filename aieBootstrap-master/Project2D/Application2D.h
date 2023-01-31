@@ -19,6 +19,8 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	
+
 protected:
 
 	aie::Renderer2D*	m_2dRenderer;

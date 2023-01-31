@@ -3,10 +3,13 @@
 #include "Font.h"
 #include "Input.h"
 #include "Sphere.h"
+#include "Plane.h"
+
+Sphere* rocket;
 
 Application2D::Application2D() 
 {
-
+	
 }
 
 Application2D::~Application2D() 
@@ -23,12 +26,29 @@ bool Application2D::startup()
 	m_font = new aie::Font("./font/consolas.ttf", 32);
 
 	m_physicsScene = new PhysicsScene();
-	m_physicsScene->setGravity(glm::vec2(0, 0));
+	//m_physicsScene->setGravity(glm::vec2(0, 0));  // turn off gravity
+	m_physicsScene->setGravity(glm::vec2(0, -19.82f));
 	m_physicsScene->setTimeStep(0.01f);
 
-	Sphere* ball;
-	ball = new Sphere(glm::vec2(-40, 0), glm::vec2(10, 30), 3.0f, 1, glm::vec4(1, 0, 0, 1));
-	m_physicsScene->addActor(ball);
+	Sphere* ball1 = new Sphere(glm::vec2(11, 20), glm::vec2(0), 4.0f, 4, glm::vec4(1, 0, 0, 1)); //red
+	Sphere* ball2 = new Sphere(glm::vec2(9, 0), glm::vec2(0), 40.0f, 4, glm::vec4(0, 1, 0, 1)); // green
+	Sphere* ball3 = new Sphere(glm::vec2(-15, -30), glm::vec2(0), 10.0f, 8, glm::vec4(0, 1, 1, 1)); //blue
+	Plane* plane = new Plane(glm::vec2(0, 1), -50, glm::vec4(1, 1, 0, 1));
+	Plane* plane2 = new Plane(glm::vec2(0, -1), -50, glm::vec4(1, 1, 0, 1));
+	Plane* plane3 = new Plane(glm::vec2(1, 0), -90, glm::vec4(1, 1, 0, 1));
+	Plane* plane4 = new Plane(glm::vec2(-1, 0), -90, glm::vec4(1, 1, 0, 1));
+
+	m_physicsScene->addActor(ball1);
+	m_physicsScene->addActor(ball2);
+	m_physicsScene->addActor(ball3);
+	m_physicsScene->addActor(plane);
+	m_physicsScene->addActor(plane2);
+	m_physicsScene->addActor(plane3);
+	m_physicsScene->addActor(plane4);
+
+	ball1->applyForce(glm::vec2(300, 0));
+	ball3->applyForce(glm::vec2(-200, 0));
+
 	return true;
 }
 
@@ -42,6 +62,7 @@ void Application2D::shutdown() {
 
 void Application2D::update(float deltaTime)
 {
+	
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 

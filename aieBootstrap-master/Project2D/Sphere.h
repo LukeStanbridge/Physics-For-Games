@@ -10,6 +10,7 @@ public:
     virtual void draw();
 
     float getRadius() { return m_radius; }
+    float getMass() { return m_mass; }
     glm::vec4 getColour() { return m_colour; }
 
 protected:

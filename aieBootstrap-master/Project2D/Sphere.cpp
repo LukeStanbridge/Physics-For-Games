@@ -12,5 +12,5 @@ Sphere::~Sphere()
 
 void Sphere::draw()
 {
-    aie::Gizmos::add2DCircle(m_position, m_radius, 10, m_colour);
+    aie::Gizmos::add2DCircle(m_position, m_radius, 32, m_colour);
 }
