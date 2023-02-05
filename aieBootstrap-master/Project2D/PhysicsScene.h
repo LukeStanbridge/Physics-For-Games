@@ -13,7 +13,6 @@ public:
 
 	void addActor(PhysicsObject* actor);
 	void removeActor(PhysicsObject* actor);
-	PhysicsObject* getActor(int position);
 	void update(float dt);
 	void draw();
 	float getTotalEnergy();
@@ -28,10 +27,14 @@ public:
 	static bool plane2Sphere(PhysicsObject*, PhysicsObject*);
 	static bool sphere2Plane(PhysicsObject*, PhysicsObject*);
 	static bool sphere2Sphere(PhysicsObject*, PhysicsObject*);
+	static bool plane2Box(PhysicsObject*, PhysicsObject*);
+	static bool box2Sphere(PhysicsObject*, PhysicsObject*);
+	static bool box2Box(PhysicsObject*, PhysicsObject*);
+	static bool sphere2Box(PhysicsObject*, PhysicsObject*);
+	static bool box2Plane(PhysicsObject*, PhysicsObject*);
 
 protected:
 	static glm::vec2 m_gravity;
 	float m_timeStep;
 	std::vector<PhysicsObject*> m_actors;
 };
-

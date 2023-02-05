@@ -12,7 +12,7 @@ public:
     virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
     virtual void draw();
     virtual void resetPosition();
-    void resolveCollision(Rigidbody* actor);
+    void resolveCollision(Rigidbody* actor, glm::vec2 contact);
 
     glm::vec2 getNormal() { return m_normal; }
     float getDistance() { return m_distanceToOrigin; }
@@ -22,4 +22,3 @@ protected:
     glm::vec4 m_colour;
     float m_distanceToOrigin;
 };
-

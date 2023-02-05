@@ -6,7 +6,7 @@
 #include <glm\ext.hpp>
 #include <Gizmos.h>
 
-class Application2D : public aie::Application 
+class Application2D : public aie::Application
 {
 public:
 
@@ -19,15 +19,15 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
-	
+
 
 protected:
 
-	aie::Renderer2D*	m_2dRenderer;
-	aie::Texture*		m_texture;
-	aie::Texture*		m_shipTexture;
-	aie::Font*			m_font;
-	
-	PhysicsScene*  m_physicsScene;
+	aie::Renderer2D* m_2dRenderer;
+	aie::Texture* m_texture;
+	aie::Texture* m_shipTexture;
+	aie::Font* m_font;
+
+	PhysicsScene* m_physicsScene;
 	float m_timer;
 };
