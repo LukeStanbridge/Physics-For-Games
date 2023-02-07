@@ -1,8 +1,11 @@
 #include "Rigidbody.h"
 #include <iostream>
 #include <cmath>
+#include "Gizmos.h"
+#include "PhysicsScene.h"
+#include "glm/glm.hpp"
 
-Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float orientation, float mass, float angularVelocity, float moment) : PhysicsObject(shapeID)
+Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float orientation, float mass, float angularVelocity, float linearDrag, float angularDrag, bool iskinematic) : PhysicsObject(shapeID)
 {
 	m_shapeID = shapeID;
 	m_position = position;
@@ -10,7 +13,9 @@ Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, 
 	m_orientation = orientation;
 	m_mass = mass;
 	m_angularVelocity = angularVelocity;
-	m_moment = moment;
+	m_linearDrag = linearDrag;
+	m_angularDrag = angularDrag;
+	m_isKinematic = iskinematic;
 }
 
 Rigidbody::~Rigidbody()
@@ -18,11 +23,35 @@ Rigidbody::~Rigidbody()
 }
 
 
-
 void Rigidbody::fixedUpdate(glm::vec2 gravity, float timeStep)
 {
+	//store the local axes 
+	float cs = cosf(m_orientation);
+	float sn = sinf(m_orientation);
+	m_localX = glm::normalize(glm::vec2(cs, sn));
+	m_localY = glm::normalize(glm::vec2(-sn, cs));
+
+	if (m_isKinematic)
+	{
+		m_velocity = glm::vec2(0);
+		m_angularVelocity = 0;
+		return;
+	}
+
+	m_velocity -= m_velocity * m_linearDrag * timeStep;
+	m_angularVelocity -= m_angularVelocity * m_angularDrag * timeStep;
+
+	if (length(m_velocity) < MIN_LINEAR_THRESHOLD) 
+	{
+		m_velocity = glm::vec2(0, 0);
+	}
+	if (abs(m_angularVelocity) < MIN_ANGULAR_THRESHOLD) 
+	{
+		m_angularVelocity = 0;
+	}
+
 	m_position += m_velocity * timeStep;
-	applyForce(gravity * m_mass * timeStep, m_position);
+	applyForce(gravity * getMass() * timeStep, glm::vec2(0, 0));
 
 	m_orientation += m_angularVelocity * timeStep;
 }
@@ -34,7 +63,7 @@ void Rigidbody::applyForce(glm::vec2 force, glm::vec2 pos)
 	m_angularVelocity += (force.y * pos.x - force.x * pos.y) / getMoment();
 }
 
-void Rigidbody::resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2* collisionNormal)
+void Rigidbody::resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2* collisionNormal, float pen)
 {
 	// find the vector between their centres, or use the provided direction of force, and make sure it's normalised 
 	glm::vec2 normal = glm::normalize(collisionNormal ? *collisionNormal : actor2->m_position - m_position);
@@ -55,23 +84,29 @@ void Rigidbody::resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2
 	{
 		// calculate the effective mass at contact point for each object 
 		// ie how much the contact point will move due to the force applied. 
-		float mass1 = 1.0f / (1.0f / m_mass + (r1 * r1) / m_moment);
-		float mass2 = 1.0f / (1.0f / actor2->m_mass + (r2 * r2) / actor2->m_moment);
+		float mass1 = 1.0f / (1.0f / getMass() + (r1 * r1) / getMoment());
+		float mass2 = 1.0f / (1.0f / actor2->getMass() + (r2 * r2) / actor2->getMoment());
 
-		float elasticity = 1;
+		float elasticity = (getElasticity() + actor2->getElasticity()) / 2.0f;
 
 		glm::vec2 force = (1.0f + elasticity) * mass1 * mass2 / (mass1 + mass2) * (v1 - v2) * normal;
 
 		//apply equal and opposite forces 
 		applyForce(-force, contact - m_position);
 		actor2->applyForce(force, contact - actor2->m_position);
+
+		if (collisionCallback != nullptr)
+			collisionCallback(actor2);
+		if (actor2->collisionCallback)
+			actor2->collisionCallback(this);
 	}
+
+	if (pen > 0) PhysicsScene::ApplyContactForces(this, actor2, normal, pen);
 }
 
 float Rigidbody::getKineticEnergy()
 {
-	//return (0.5 * m_mass * glm::dot(m_velocity, m_velocity));  // KE = 1/2 * m * v(to the power of 2)
-	return 0.5f * (m_mass * glm::dot(m_velocity, m_velocity) + m_moment * m_angularVelocity * m_angularVelocity);
+	return 0.5f * (getMass() * glm::dot(m_velocity, m_velocity) + getMoment() * m_angularVelocity * m_angularVelocity);
 }
 
 float Rigidbody::getPotentialEnergy()

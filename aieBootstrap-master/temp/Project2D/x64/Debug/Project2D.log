@@ -1,2 +1,4 @@
 ﻿  Application2D.cpp
-  Project2D.vcxproj -> C:\Users\USER\Desktop\aieBootstrap-master\temp\Project2D\x64\Debug\Project2D.exe
+C:\Users\s213090\Documents\GitHub\Physics-For-Games\aieBootstrap-master\Project2D\Application2D.h(35,34): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\s213090\Documents\GitHub\Physics-For-Games\aieBootstrap-master\Project2D\Application2D.h(36,35): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+  Project2D.vcxproj -> C:\Users\s213090\Documents\GitHub\Physics-For-Games\aieBootstrap-master\temp\Project2D\x64\Debug\Project2D.exe

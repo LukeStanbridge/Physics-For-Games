@@ -1,5 +1,6 @@
 #pragma once
 #include "PhysicsObject.h"
+#include "Rigidbody.h"
 #include "glm/glm.hpp"
 #include <algorithm>
 #include <vector>
@@ -15,7 +16,7 @@ public:
 	void removeActor(PhysicsObject* actor);
 	void update(float dt);
 	void draw();
-	float getTotalEnergy();
+	static void ApplyContactForces(Rigidbody* body1, Rigidbody* body2, glm::vec2 norm, float pen);
 
 	static void setGravity(const glm::vec2 gravity) { m_gravity = gravity; }
 	static glm::vec2 getGravity() { return m_gravity; }

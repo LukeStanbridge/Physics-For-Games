@@ -1,11 +1,16 @@
 #include "Box.h"
+#include "Gizmos.h"
 
-Box::Box(glm::vec2 extents, glm::vec4 colour, glm::vec2 localX, glm::vec2 localY, glm::vec2 position, glm::vec2 velocity, float mass, float angularVelocity, float moment) : Rigidbody(BOX, position, velocity, 0, mass, angularVelocity, moment)
+Box::Box(glm::vec2 extents, glm::vec4 colour, glm::vec2 position, glm::vec2 velocity, float mass, float angularVelocity, float linearDrag, float angularDrag, bool iskinematic) : Rigidbody(BOX, position, velocity, 0, mass, angularVelocity, linearDrag, angularDrag, iskinematic)
 {
 	m_extents = extents;
 	m_colour = colour;
-	m_localX = localX;
-	m_localY = localY;
+    m_moment = 1.0f / 12.0f * mass * (extents.x * 2) * (extents.y * 2);
+
+    float cs = cosf(m_orientation);
+    float sn = sinf(m_orientation);
+    m_localX = glm::normalize(glm::vec2(cs, sn));
+    m_localY = glm::normalize(glm::vec2(-sn, cs));
 }
 
 Box::~Box()
@@ -14,13 +19,14 @@ Box::~Box()
 
 void Box::fixedUpdate(glm::vec2 gravity, float timeStep)
 {
+    //gravity = glm::vec2 (0, 0); // floaty boxes 
 	Rigidbody::fixedUpdate(gravity, timeStep);
 
-	//store the local axes 
-	float cs = cosf(m_orientation);
-	float sn = sinf(m_orientation);
-	m_localX = glm::normalize(glm::vec2(cs, sn));
-	m_localY = glm::normalize(glm::vec2(-sn, cs));
+	////store the local axes 
+	//float cs = cosf(m_orientation);
+	//float sn = sinf(m_orientation);
+	//m_localX = glm::normalize(glm::vec2(cs, sn));
+	//m_localY = glm::normalize(glm::vec2(-sn, cs));
 }
 
 void Box::draw()
@@ -39,7 +45,7 @@ void Box::draw()
 }
 
 // check if any of the other box's corners are inside this box 
-bool Box::checkBoxCorners(/*const */Box& box, glm::vec2& contact, int& numContacts, float& pen, glm::vec2& edgeNormal)
+bool Box::checkBoxCorners(Box& box, glm::vec2& contact, int& numContacts, float& pen, glm::vec2& edgeNormal)
 {
     float minX, maxX, minY, maxY;
     float boxW = box.getExtents().x * 2;
@@ -79,38 +85,40 @@ bool Box::checkBoxCorners(/*const */Box& box, glm::vec2& contact, int& numContac
 
     // if we lie entirely to one side of the box along one axis, we've found a separating
         // axis, and we can exit 
-    if (maxX <= -m_extents.x || minX >= m_extents.x ||
-        maxY <= -m_extents.y || minY >= m_extents.y)
+    if (maxX <= -m_extents.x || minX >= m_extents.x || maxY <= -m_extents.y || minY >= m_extents.y)
         return false;
     if (numLocalContacts == 0)
         return false;
 
     bool res = false;
-    contact += m_position + (localContact.x * m_localX + localContact.y * m_localY) /
-        (float)numLocalContacts;
+    contact += m_position + (localContact.x * m_localX + localContact.y * m_localY) / (float)numLocalContacts;
     numContacts++;
 
     // find the minimum penetration vector as a penetration amount and normal 
     float pen0 = m_extents.x - minX;
-    if (pen0 > 0 && (pen0 < pen || pen == 0)) {
+    if (pen0 > 0 && (pen0 < pen || pen == 0)) 
+    {
         edgeNormal = m_localX;
         pen = pen0;
         res = true;
     }
     pen0 = maxX + m_extents.x;
-    if (pen0 > 0 && (pen0 < pen || pen == 0)) {
+    if (pen0 > 0 && (pen0 < pen || pen == 0)) 
+    {
         edgeNormal = -m_localX;
         pen = pen0;
         res = true;
     }
     pen0 = m_extents.y - minY;
-    if (pen0 > 0 && (pen0 < pen || pen == 0)) {
+    if (pen0 > 0 && (pen0 < pen || pen == 0)) 
+    {
         edgeNormal = m_localY;
         pen = pen0;
         res = true;
     }
     pen0 = maxY + m_extents.y;
-    if (pen0 > 0 && (pen0 < pen || pen == 0)) {
+    if (pen0 > 0 && (pen0 < pen || pen == 0)) 
+    {
         edgeNormal = -m_localY;
         pen = pen0;
         res = true;

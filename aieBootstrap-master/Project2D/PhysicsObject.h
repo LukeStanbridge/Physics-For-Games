@@ -3,11 +3,13 @@
 
 enum ShapeType
 {
+    JOINT = -1,
     PLANE = 0,
     SPHERE,
     BOX,
-    SHAPE_COUNT
 };
+
+const int SHAPE_COUNT = 3;
 
 class PhysicsObject
 {
@@ -19,9 +21,11 @@ public:
     virtual void draw() = 0;
     virtual void resetPosition() {};
     virtual float getEnergy() { return 0; }
+    virtual float getElasticity() { return 0.3f; }
     virtual ShapeType getShapeID() { return m_shapeID; }
 
 protected:
     ShapeType m_shapeID;
+    float m_elasticity;
 };
 

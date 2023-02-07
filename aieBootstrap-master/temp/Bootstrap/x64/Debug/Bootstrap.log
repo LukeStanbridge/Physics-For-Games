@@ -1,12 +1,2 @@
-﻿  imgui.cpp
-  imgui_draw.cpp
-  Application.cpp
-  Font.cpp
-  Gizmos.cpp
-  imgui_glfw3.cpp
-  Input.cpp
-  Renderer2D.cpp
-  Texture.cpp
-  Generating Code...
-  gl_core_4_4.c
-  Bootstrap.vcxproj -> C:\Users\USER\Desktop\aieBootstrap-master\temp\Bootstrap\x64\Debug\Bootstrap.lib
+﻿  Input.cpp
+  Bootstrap.vcxproj -> C:\Users\s213090\Documents\GitHub\Physics-For-Games\aieBootstrap-master\temp\Bootstrap\x64\Debug\Bootstrap.lib

@@ -19,7 +19,9 @@ public:
 	virtual void update(float deltaTime);
 	virtual void draw();
 
+	virtual void Rope(int num);
 
+	virtual glm::vec2 Application2D::screenToWorld(glm::vec2 screenPos);
 
 protected:
 
@@ -30,4 +32,8 @@ protected:
 
 	PhysicsScene* m_physicsScene;
 	float m_timer;
+	float m_cameraX = getWindowWidth();
+	float m_cameraY = getWindowHeight();
+	const float extents = 100;
+	const float aspectRatio = 16.0f / 9.0f;
 };
