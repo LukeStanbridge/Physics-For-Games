@@ -1,6 +1,7 @@
 #pragma once
 #include "PhysicsObject.h"
 #include "Rigidbody.h"
+#include "Sphere.h"
 #include "glm/glm.hpp"
 #include <algorithm>
 #include <vector>
@@ -13,9 +14,12 @@ public:
 	~PhysicsScene();
 
 	void addActor(PhysicsObject* actor);
+	PhysicsObject* getActor(int actor);
 	void removeActor(PhysicsObject* actor);
+	void removeAllActors();
 	void update(float dt);
 	void draw();
+	void getFallingObjects();
 	static void ApplyContactForces(Rigidbody* body1, Rigidbody* body2, glm::vec2 norm, float pen);
 
 	static void setGravity(const glm::vec2 gravity) { m_gravity = gravity; }
@@ -23,6 +27,7 @@ public:
 
 	void setTimeStep(const float timeStep) { m_timeStep = timeStep; }
 	float getTimeStep() const { return m_timeStep; }
+	std::vector<PhysicsObject*> m_actors;
 
 	static bool plane2Plane(PhysicsObject*, PhysicsObject*);
 	static bool plane2Sphere(PhysicsObject*, PhysicsObject*);
@@ -37,5 +42,5 @@ public:
 protected:
 	static glm::vec2 m_gravity;
 	float m_timeStep;
-	std::vector<PhysicsObject*> m_actors;
+	/*std::vector<PhysicsObject*> m_actors;*/
 };

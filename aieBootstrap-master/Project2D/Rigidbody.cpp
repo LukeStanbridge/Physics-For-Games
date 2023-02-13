@@ -98,10 +98,23 @@ void Rigidbody::resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2
 		if (collisionCallback != nullptr)
 			collisionCallback(actor2);
 		if (actor2->collisionCallback)
-			actor2->collisionCallback(this);
+		{
+			// check to see if the player has already collided with objecth
+			std::vector<Rigidbody*>::iterator iterator;
+			iterator = std::find(m_collided.begin(), m_collided.end(), actor2);
+
+			if (iterator == m_collided.end())
+			{
+				actor2->collisionCallback(this);
+				m_collided.push_back(actor2);
+			}
+		}
+			
+
+		if (pen > 0) PhysicsScene::ApplyContactForces(this, actor2, normal, pen);
 	}
 
-	if (pen > 0) PhysicsScene::ApplyContactForces(this, actor2, normal, pen);
+	/*if (pen > 0) PhysicsScene::ApplyContactForces(this, actor2, normal, pen);*/
 }
 
 float Rigidbody::getKineticEnergy()

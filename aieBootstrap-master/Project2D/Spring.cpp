@@ -48,10 +48,10 @@ void Spring::draw()
 
 glm::vec2 Spring::getContact1()
 {
-	return m_body1 ? /*m_body1->toWorld(m_contact1)*/ m_body1->getPosition() : m_contact1;
+	return m_body1 ? m_body1->getPosition() : m_contact1;
 }
 
 glm::vec2 Spring::getContact2()
 {
-	return m_body2 ? /*m_body2->toWorld(m_contact2)*/ m_body2->getPosition() : m_contact2;
+	return m_body2 ? m_body2->getPosition() : m_contact2;
 }

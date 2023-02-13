@@ -23,9 +23,11 @@ public:
     virtual float getEnergy() { return 0; }
     virtual float getElasticity() { return 0.3f; }
     virtual ShapeType getShapeID() { return m_shapeID; }
+    virtual glm::vec2 getPosition() { return m_position; }
 
 protected:
     ShapeType m_shapeID;
     float m_elasticity;
+    glm::vec2 m_position;
 };
 

@@ -3,6 +3,7 @@
 #include "Plane.h"
 #include <iostream>
 #include "Box.h"
+#include "Spring.h"
 
 glm::vec2 PhysicsScene::m_gravity{ 0, 0 };
 
@@ -23,6 +24,11 @@ void PhysicsScene::addActor(PhysicsObject* actor)
     m_actors.push_back(actor);
 }
 
+PhysicsObject* PhysicsScene::getActor(int actor)
+{
+    return m_actors[actor];
+}
+
 void PhysicsScene::removeActor(PhysicsObject* actor)
 {
     // check to see if the actor is in m_actors
@@ -35,12 +41,21 @@ void PhysicsScene::removeActor(PhysicsObject* actor)
     }
 }
 
+void PhysicsScene::removeAllActors()
+{
+    for (int i = 0; i < m_actors.size(); i++)
+    {
+        PhysicsObject* actor = m_actors[i];
+        removeActor(actor);
+    }
+}
+
 // function pointer array for doing our collisions
 typedef bool(*fn)(PhysicsObject*, PhysicsObject*);
 
 static fn collisionFunctionArray[] =
 {
-    PhysicsScene::plane2Plane,  PhysicsScene::plane2Sphere,  PhysicsScene::plane2Box,
+   PhysicsScene::plane2Plane,  PhysicsScene::plane2Sphere,  PhysicsScene::plane2Box,
    PhysicsScene::sphere2Plane, PhysicsScene::sphere2Sphere, PhysicsScene::sphere2Box,
    PhysicsScene::box2Plane,    PhysicsScene::box2Sphere,    PhysicsScene::box2Box,
 };
@@ -101,6 +116,40 @@ void PhysicsScene::draw()
     }
 }
 
+void PhysicsScene::getFallingObjects()
+{
+    for (int i = 0; i < m_actors.size(); i++)
+    {
+        PhysicsObject* actor = m_actors[i];
+        if (actor->getShapeID() == 2)
+        {
+            Box* box = dynamic_cast<Box*>(actor);
+            if (box->getPosition().y < -60) // how low until objects are destoryed
+            {
+                removeActor(box);
+            }
+        }
+        
+        if (actor->getShapeID() == 1 && actor)
+        {
+            Sphere* ball = dynamic_cast<Sphere*>(actor);
+            if (ball->getPosition().y < -100)
+            {
+                removeActor(ball);
+            }
+        }
+
+        /*if (actor->getShapeID() == JOINT)
+        {
+            Spring* spring = dynamic_cast<Spring*>(actor);
+            if (spring->getPosition().y < -40)
+            {
+                removeActor(spring);
+            }
+        }*/
+    }
+}
+
 // body2 can be null for a Plane 
 void PhysicsScene::ApplyContactForces(Rigidbody* body1, Rigidbody* body2, glm::vec2 norm, float pen)
 {
@@ -139,7 +188,7 @@ bool PhysicsScene::sphere2Plane(PhysicsObject* obj1, PhysicsObject* obj2)
         float velocityOutOfPlane = glm::dot(sphere->getVelocity(), plane->getNormal());
         if (intersection > 0 && velocityOutOfPlane < 0)
         {
-            plane->resolveCollision(sphere, contact); // apply collisions
+            plane->resolveCollision(sphere, contact); // apply collisions`
             return true;
         }
     }
@@ -151,6 +200,7 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
     // try to cast objects to sphere and sphere
     Sphere* sphere1 = dynamic_cast<Sphere*>(obj1);
     Sphere* sphere2 = dynamic_cast<Sphere*>(obj2);
+
     // if we are successful then test for collision
     if (sphere1 != nullptr && sphere2 != nullptr)
     {

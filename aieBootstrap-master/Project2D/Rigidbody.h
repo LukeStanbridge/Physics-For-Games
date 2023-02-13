@@ -1,7 +1,7 @@
 #pragma once
 #include "PhysicsObject.h"
 #include <functional>
-
+#include <vector>
 
 class Rigidbody : public PhysicsObject
 {
@@ -22,7 +22,7 @@ public:
     glm::vec2 getPosition() const { return m_position; }
     void setPosition(glm::vec2 position) { m_position = position; }
 
-    glm::vec2 toWorld(glm::vec2 worldCoordinates) { return worldCoordinates + getLocalX()/*m_localX*/ * worldCoordinates.x + getLocalY()/*m_localY*/ * worldCoordinates.y; }
+    glm::vec2 toWorld(glm::vec2 worldCoordinates) { return worldCoordinates + getLocalX() * worldCoordinates.x + getLocalY() * worldCoordinates.y; }
 
     float getOrientatation() { return m_orientation; }
     glm::vec2 getVelocity() { return m_velocity; }
@@ -54,5 +54,7 @@ protected:
 
     const float MIN_LINEAR_THRESHOLD = 0.1f;
     const float MIN_ANGULAR_THRESHOLD = 0.1f;
+
+    std::vector<Rigidbody*> m_collided;
 
 };
