@@ -12,9 +12,7 @@ Spring::Spring(Rigidbody* body1, Rigidbody* body2, float springCoefficient, floa
 	m_contact2 = contact2;
 }
 
-Spring::~Spring()
-{
-}
+Spring::~Spring() { }
 
 void Spring::fixedUpdate(glm::vec2 gravity, float timeStep)
 {

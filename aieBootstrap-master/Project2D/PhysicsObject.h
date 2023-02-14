@@ -27,7 +27,7 @@ public:
 
 protected:
     ShapeType m_shapeID;
-    float m_elasticity;
-    glm::vec2 m_position;
+    float m_elasticity = 0.0f;
+    glm::vec2 m_position = {0, 0};
 };
 

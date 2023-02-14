@@ -1,7 +1,6 @@
 #include "PhysicsScene.h"
 #include "Sphere.h"
 #include "Plane.h"
-#include <iostream>
 #include "Box.h"
 #include "Spring.h"
 
@@ -63,7 +62,6 @@ static fn collisionFunctionArray[] =
 void PhysicsScene::update(float dt)
 {
     // update physics at a fixed time step
-
     static float accumulatedTime = 0.0f;
     accumulatedTime += dt;
 
@@ -91,10 +89,8 @@ void PhysicsScene::update(float dt)
             int shapeId1 = object1->getShapeID();
             int shapeId2 = object2->getShapeID();
 
-            // this check will ensure we don't include any joints  
-            // in the collision checks 
-            if (shapeId1 < 0 || shapeId2 < 0)
-                continue;
+            // this check will ensure we don't include any joints in the collision checks 
+            if (shapeId1 < 0 || shapeId2 < 0) continue;
 
             // using function pointers
             int functionIdx = (shapeId1 * SHAPE_COUNT) + shapeId2;
@@ -129,24 +125,6 @@ void PhysicsScene::getFallingObjects()
                 removeActor(box);
             }
         }
-        
-        if (actor->getShapeID() == 1 && actor)
-        {
-            Sphere* ball = dynamic_cast<Sphere*>(actor);
-            if (ball->getPosition().y < -100)
-            {
-                removeActor(ball);
-            }
-        }
-
-        /*if (actor->getShapeID() == JOINT)
-        {
-            Spring* spring = dynamic_cast<Spring*>(actor);
-            if (spring->getPosition().y < -40)
-            {
-                removeActor(spring);
-            }
-        }*/
     }
 }
 
@@ -204,8 +182,6 @@ bool PhysicsScene::sphere2Sphere(PhysicsObject* obj1, PhysicsObject* obj2)
     // if we are successful then test for collision
     if (sphere1 != nullptr && sphere2 != nullptr)
     {
-        // TODO do the necessary maths in here
-        // TODO if the spheres touch, set their velocities to zero for now
         float dist = glm::distance(sphere1->getPosition(), sphere2->getPosition());
         if (dist <= (sphere1->getRadius() + sphere2->getRadius()))
         {

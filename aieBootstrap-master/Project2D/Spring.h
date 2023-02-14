@@ -17,10 +17,8 @@ public:
 protected:
     Rigidbody* m_body1;
     Rigidbody* m_body2;
-
     glm::vec2 m_contact1;
     glm::vec2 m_contact2;
-
     float m_damping;
     float m_restLength;
     float m_springCoefficient;  // the restoring force; 

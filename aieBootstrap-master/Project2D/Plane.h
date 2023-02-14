@@ -1,7 +1,7 @@
 #pragma once
 #include "Application2D.h"
 #include "Rigidbody.h"
-#include <Gizmos.h>
+#include "Gizmos.h"
 
 class Plane : public PhysicsObject
 {
@@ -11,7 +11,6 @@ public:
 
     virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
     virtual void draw();
-    virtual void resetPosition();
     void resolveCollision(Rigidbody* actor, glm::vec2 contact);
 
     glm::vec2 getNormal() { return m_normal; }

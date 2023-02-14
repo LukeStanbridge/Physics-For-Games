@@ -12,9 +12,6 @@ public:
     virtual void fixedUpdate(glm::vec2 gravity, float timeStep);
     void applyForce(glm::vec2 force, glm::vec2 pos);
     void resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2* collisionNormal = nullptr, float pen = 0);
-    
-    virtual float getKineticEnergy();
-    virtual float getPotentialEnergy();
 
     void setKinematic(bool state) { m_isKinematic = state; }
     bool isKinematic() { return m_isKinematic; }
@@ -43,18 +40,17 @@ protected:
     float m_mass;
     float m_orientation;    //2D so we only need a single float to represent our orientation
     float m_angularVelocity;
-    float m_moment;
+    float m_moment = 0.0f;
     float m_linearDrag;
     float m_angularDrag;
     bool m_isKinematic;
 
     // store the local x,y axes of the box based on its angle of rotation 
-    glm::vec2 m_localX;
-    glm::vec2 m_localY;
+    glm::vec2 m_localX = { 0, 0 };
+    glm::vec2 m_localY = { 0, 0 };
 
     const float MIN_LINEAR_THRESHOLD = 0.1f;
     const float MIN_ANGULAR_THRESHOLD = 0.1f;
 
     std::vector<Rigidbody*> m_collided;
-
 };

@@ -1,4 +1,15 @@
 ﻿  Application2D.cpp
-C:\Users\USER\Documents\GitHub\Physics-For-Games\aieBootstrap-master\Project2D\Application2D.h(40,34): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
-C:\Users\USER\Documents\GitHub\Physics-For-Games\aieBootstrap-master\Project2D\Application2D.h(41,35): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
-  Project2D.vcxproj -> C:\Users\USER\Documents\GitHub\Physics-For-Games\aieBootstrap-master\temp\Project2D\x64\Debug\Project2D.exe
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\Application2D.h(42,34): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\Application2D.h(43,35): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+  PhysicsScene.cpp
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\Application2D.h(42,34): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\Application2D.h(43,35): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\PhysicsScene.cpp(79,37): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Plane.cpp
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\Application2D.h(42,34): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\Application2D.h(43,35): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+  main.cpp
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\Application2D.h(42,34): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\Project2D\Application2D.h(43,35): warning C4244: 'initializing': conversion from 'unsigned int' to 'float', possible loss of data
+  Generating Code...
+  Project2D.vcxproj -> C:\Users\s213090\Downloads\Physics-For-Games-main\Physics-For-Games-main\aieBootstrap-master\temp\Project2D\x64\Debug\Project2D.exe

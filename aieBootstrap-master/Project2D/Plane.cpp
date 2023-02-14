@@ -1,5 +1,4 @@
 #include "Plane.h"
-#include <iostream>
 
 Plane::Plane(glm::vec2 normal, float distance, glm::vec4 colour) : PhysicsObject(ShapeType::PLANE)
 {
@@ -8,13 +7,9 @@ Plane::Plane(glm::vec2 normal, float distance, glm::vec4 colour) : PhysicsObject
     m_colour = colour;
 }
 
-Plane::~Plane()
-{
-}
+Plane::~Plane() { }
 
-void Plane::fixedUpdate(glm::vec2 gravity, float timeStep)
-{
-}
+void Plane::fixedUpdate(glm::vec2 gravity, float timeStep) { }
 
 void Plane::draw()
 {
@@ -26,13 +21,8 @@ void Plane::draw()
     colourFade.a = 0;
     glm::vec2 start = centerPoint + (parallel * lineSegmentLength);
     glm::vec2 end = centerPoint - (parallel * lineSegmentLength);
-    //aie::Gizmos::add2DLine(start, end, colour);
     aie::Gizmos::add2DTri(start, end, start - m_normal * 10.0f, m_colour, m_colour, colourFade);
     aie::Gizmos::add2DTri(end, end - m_normal * 10.0f, start - m_normal * 10.0f, m_colour, colourFade, colourFade);
-}
-
-void Plane::resetPosition()
-{
 }
 
 void Plane::resolveCollision(Rigidbody* actor2, glm::vec2 contact)
@@ -59,8 +49,6 @@ void Plane::resolveCollision(Rigidbody* actor2, glm::vec2 contact)
 
     glm::vec2 force = m_normal * j;
 
-    float kePre = actor2->getKineticEnergy();
-
     actor2->applyForce(force, contact - actor2->getPosition());
 
     if (actor2->collisionCallback)
@@ -68,9 +56,4 @@ void Plane::resolveCollision(Rigidbody* actor2, glm::vec2 contact)
 
     float pen = glm::dot(contact, m_normal) - m_distanceToOrigin;
     PhysicsScene::ApplyContactForces(actor2, nullptr, m_normal, pen);
-
-    float kePost = actor2->getKineticEnergy();
-
-    float deltaKE = kePost - kePre;
-    if (deltaKE > kePost * 0.01f) std::cout << "Kinetic Energy discrepancy greater than 1% detected!!";
 }

@@ -1,9 +1,5 @@
 #include "Rigidbody.h"
-#include <iostream>
-#include <cmath>
-#include "Gizmos.h"
 #include "PhysicsScene.h"
-#include "glm/glm.hpp"
 
 Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, float orientation, float mass, float angularVelocity, float linearDrag, float angularDrag, bool iskinematic) : PhysicsObject(shapeID)
 {
@@ -16,12 +12,11 @@ Rigidbody::Rigidbody(ShapeType shapeID, glm::vec2 position, glm::vec2 velocity, 
 	m_linearDrag = linearDrag;
 	m_angularDrag = angularDrag;
 	m_isKinematic = iskinematic;
+	m_localX = { 0, 0 };
+	m_localY = { 0, 0 };
 }
 
-Rigidbody::~Rigidbody()
-{
-}
-
+Rigidbody::~Rigidbody() { }
 
 void Rigidbody::fixedUpdate(glm::vec2 gravity, float timeStep)
 {
@@ -110,19 +105,6 @@ void Rigidbody::resolveCollision(Rigidbody* actor2, glm::vec2 contact, glm::vec2
 			}
 		}
 			
-
 		if (pen > 0) PhysicsScene::ApplyContactForces(this, actor2, normal, pen);
 	}
-
-	/*if (pen > 0) PhysicsScene::ApplyContactForces(this, actor2, normal, pen);*/
-}
-
-float Rigidbody::getKineticEnergy()
-{
-	return 0.5f * (getMass() * glm::dot(m_velocity, m_velocity) + getMoment() * m_angularVelocity * m_angularVelocity);
-}
-
-float Rigidbody::getPotentialEnergy()
-{
-	return -getMass() * glm::dot(PhysicsScene::getGravity(), getPosition());
 }

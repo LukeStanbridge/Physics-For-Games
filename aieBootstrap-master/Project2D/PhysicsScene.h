@@ -1,7 +1,6 @@
 #pragma once
 #include "PhysicsObject.h"
 #include "Rigidbody.h"
-#include "Sphere.h"
 #include "glm/glm.hpp"
 #include <algorithm>
 #include <vector>
@@ -9,7 +8,6 @@
 class PhysicsScene
 {
 public:
-
 	PhysicsScene();
 	~PhysicsScene();
 
@@ -42,5 +40,4 @@ public:
 protected:
 	static glm::vec2 m_gravity;
 	float m_timeStep;
-	/*std::vector<PhysicsObject*> m_actors;*/
 };

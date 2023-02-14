@@ -6,6 +6,7 @@ Box::Box(glm::vec2 extents, glm::vec4 colour, glm::vec2 position, glm::vec2 velo
 	m_extents = extents;
 	m_colour = colour;
     m_moment = 1.0f / 12.0f * mass * (extents.x * 2) * (extents.y * 2);
+    m_normal = { 0, 0 };
 
     float cs = cosf(m_orientation);
     float sn = sinf(m_orientation);
@@ -13,28 +14,15 @@ Box::Box(glm::vec2 extents, glm::vec4 colour, glm::vec2 position, glm::vec2 velo
     m_localY = glm::normalize(glm::vec2(-sn, cs));
 }
 
-Box::~Box()
-{
-}
+Box::~Box() { }
 
 void Box::fixedUpdate(glm::vec2 gravity, float timeStep)
 {
-    //gravity = glm::vec2 (0, 0); // floaty boxes 
 	Rigidbody::fixedUpdate(gravity, timeStep);
-
-	////store the local axes 
-	//float cs = cosf(m_orientation);
-	//float sn = sinf(m_orientation);
-	//m_localX = glm::normalize(glm::vec2(cs, sn));
-	//m_localY = glm::normalize(glm::vec2(-sn, cs));
 }
 
 void Box::draw()
 {
-	// if only using rotation
-	// glm::mat4 transform = glm::rotate(m_rotation, glm::vec3(0, 0, 1)); 
-	// aie::Gizmos::add2DAABBFilled(getCenter(), m_extents, m_colour, &transform); 
-
 	// draw using local axes 
 	glm::vec2 p1 = m_position - m_localX * m_extents.x - m_localY * m_extents.y;
 	glm::vec2 p2 = m_position + m_localX * m_extents.x - m_localY * m_extents.y;
@@ -47,7 +35,7 @@ void Box::draw()
 // check if any of the other box's corners are inside this box 
 bool Box::checkBoxCorners(Box& box, glm::vec2& contact, int& numContacts, float& pen, glm::vec2& edgeNormal)
 {
-    float minX, maxX, minY, maxY;
+    float minX = 0.0f, maxX = 0.0f, minY = 0.0f, maxY = 0.0f;
     float boxW = box.getExtents().x * 2;
     float boxH = box.getExtents().y * 2;
     int numLocalContacts = 0;
@@ -83,8 +71,7 @@ bool Box::checkBoxCorners(Box& box, glm::vec2& contact, int& numContacts, float&
         }
     }
 
-    // if we lie entirely to one side of the box along one axis, we've found a separating
-        // axis, and we can exit 
+    // if we lie entirely to one side of the box along one axis, we've found a separating axis, and we can exit 
     if (maxX <= -m_extents.x || minX >= m_extents.x || maxY <= -m_extents.y || minY >= m_extents.y)
         return false;
     if (numLocalContacts == 0)

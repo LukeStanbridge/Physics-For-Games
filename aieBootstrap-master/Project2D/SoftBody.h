@@ -1,5 +1,6 @@
-#include <string>
+#pragma once
 #include "PhysicsScene.h"
+#include <string>
 
 class SoftBody
 {
