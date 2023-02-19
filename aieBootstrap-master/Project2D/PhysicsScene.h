@@ -1,9 +1,5 @@
 #pragma once
-#include "PhysicsObject.h"
 #include "Rigidbody.h"
-#include "glm/glm.hpp"
-#include <algorithm>
-#include <vector>
 
 class PhysicsScene
 {
