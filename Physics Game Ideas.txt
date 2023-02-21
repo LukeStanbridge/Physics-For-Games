@@ -8,3 +8,11 @@ Ragdoll enemies on death
 Upgrades
 UI
 Destructible Enviroment
+
+Current - https://www.youtube.com/watch?v=0jGL5_DFIo8 @@@@ 6:45
+Dave / GameDevelopment YouTube Channel - https://www.youtube.com/@davegamedevelopment/videos
+All kinds of guns with one script - https://www.youtube.com/watch?v=bqNW08Tac0Y
+
+Weapon Sway - https://www.youtube.com/watch?v=45ssV6CEgoU&list=PLrMEhC9sAD1ya9RFdnjFUL1foVlZjRkE7&index=4
+Weapon Recoil - https://www.youtube.com/watch?v=6hyQ2rPkMDY&list=PLrMEhC9sAD1ya9RFdnjFUL1foVlZjRkE7&index=6
+Physics-based cannon - https://www.youtube.com/watch?v=xHYmUGyCwQU
