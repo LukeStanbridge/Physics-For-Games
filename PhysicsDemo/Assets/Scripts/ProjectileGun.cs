@@ -16,10 +16,6 @@ public class ProjectileGun : MonoBehaviour
 
     int bulletsLeft, bulletsShot;
 
-    //recoil
-    public Rigidbody playerRB;
-    public float recoilForce;
-
     //bools
     bool shooting, readyToShoot, reloading;
 
@@ -42,6 +38,7 @@ public class ProjectileGun : MonoBehaviour
         // make sure mag is full
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        Cursor.lockState = CursorLockMode.Confined; //bound cursor to screen
     }
 
     private void Update()

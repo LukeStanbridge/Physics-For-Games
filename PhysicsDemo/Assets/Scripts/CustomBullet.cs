@@ -17,6 +17,8 @@ public class CustomBullet : MonoBehaviour
     //damage
     public int explosionDamage;
     public float explosionRange;
+    public float explosionForce;
+    public float explosionUpwards;
 
     //lifetime
     public int maxCollisions;
@@ -51,9 +53,27 @@ public class CustomBullet : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             //Get component of enemy and call Take Damage
+            if(enemies[i].GetComponent<EnemyAI>()) enemies[i].GetComponent<EnemyAI>().TakeDamage(explosionDamage);
 
-            // Just and example
-            //enemies[i].GetComponent<EnemyAI>().TakeDamage(explosionDamage);
+            //add explosion force if enemy has rigidbody
+            if (enemies[i].GetComponent<Rigidbody>())
+            {
+                enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange, explosionUpwards);
+            }
+
+            Collider[] ragdollColliders = Physics.OverlapSphere(transform.position, explosionRange);
+            foreach (Collider c in ragdollColliders)
+            {
+                if (c.gameObject.tag == "Ragdoll")
+                {
+                    Rigidbody rb = c.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.AddExplosionForce(explosionForce, transform.position, explosionRange, explosionUpwards);
+                    }
+                }
+            }
+
         }
 
         //add a little delay, just to make verything works okay
