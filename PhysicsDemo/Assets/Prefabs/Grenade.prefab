@@ -137,8 +137,8 @@ MonoBehaviour:
   useGravity: 1
   explosionDamage: 150
   explosionRange: 5
-  explosionForce: 500
-  explosionUpwards: 400
+  explosionForce: 50
+  explosionUpwards: 40
   maxCollisions: 10
   maxLifetime: 2
   explodeOnTouch: 1
