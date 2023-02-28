@@ -1,10 +1,13 @@
-Ragdoll enemies on death
 UI
 Score
 Timer
 Alternmate Fire Modes
-Upgrades
-Destructible Enviroment
+Alternate guns
+Weapon Sway/Recoil
+Player Health display
+Fix enemy bullets hitting player
+Fix muzzle flash movement
+Fix constant dash in mid air
 
 Dave / GameDevelopment YouTube Channel - https://www.youtube.com/@davegamedevelopment/videos
 

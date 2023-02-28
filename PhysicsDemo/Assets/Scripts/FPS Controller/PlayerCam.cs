@@ -14,6 +14,7 @@ public class PlayerCam : MonoBehaviour
 
     private void Start()
     {
+        transform.rotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }

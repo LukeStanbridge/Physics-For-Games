@@ -43,11 +43,12 @@ public class FPSPlayerMovement : MonoBehaviour
     private RaycastHit slopeHit;
     private bool exitingSlope;
 
-
+    public TextMeshProUGUI gameOver;
     public Transform orientation;
 
     float horizontalInput;
     float verticalInput;
+    public float health;
 
     Vector3 moveDirection;
 
@@ -329,5 +330,12 @@ public class FPSPlayerMovement : MonoBehaviour
     {
         float mult = Mathf.Pow(10.0f, (float)digits);
         return Mathf.Round(value * mult) / mult;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0) gameOver.gameObject.SetActive(true);//game over
     }
 }

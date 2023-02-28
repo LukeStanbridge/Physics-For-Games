@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 790753657526060058}
   m_Layer: 6
   m_Name: Bullet
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -129,17 +129,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8735645949579112539}
-  explosion: {fileID: 1828176872806910, guid: 64891a0eb28db934898420d80ca07cb3, type: 3}
+  explosion: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 8
   bounciness: 0
   useGravity: 0
   explosionDamage: 30
-  explosionRange: 0.5
+  explosionRange: 0.2
   explosionForce: 0
+  explosionUpwards: 0
   maxCollisions: 1
-  maxLifetime: 4
+  maxLifetime: 2
   explodeOnTouch: 1
 --- !u!96 &790753657526060058
 TrailRenderer:
@@ -244,8 +245,8 @@ TrailRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
-    shadowBias: 0.5
+    shadowBias: 0.1
     generateLightingData: 0
-  m_MinVertexDistance: 0.1
+  m_MinVertexDistance: 0.01
   m_Autodestruct: 0
   m_Emitting: 1
