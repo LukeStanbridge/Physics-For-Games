@@ -24,6 +24,7 @@ public class CustomBullet : MonoBehaviour
     public int maxCollisions;
     public float maxLifetime;
     public bool explodeOnTouch = true;
+    public bool explodeOnImpact = true;
 
     private int collisons;
     private PhysicMaterial physicsMat;
@@ -57,7 +58,7 @@ public class CustomBullet : MonoBehaviour
             if(enemies[i].GetComponent<FPSPlayerMovement>()) enemies[i].GetComponent<FPSPlayerMovement>().TakeDamage(explosionDamage);
 
             //add explosion force if enemy has rigidbody
-            if (enemies[i].GetComponent<Rigidbody>())
+            if (enemies[i].GetComponent<Rigidbody>() && !enemies[i].gameObject.CompareTag("Player"))
             {
                 enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange, explosionUpwards);
             }
@@ -95,6 +96,8 @@ public class CustomBullet : MonoBehaviour
 
         //explode if bullet hits enemy directly and explodeOnTouch is activated
         if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
+
+        if (collision.collider.gameObject.layer == 8 && explodeOnImpact) Explode();
 
         if (collision.collider.CompareTag("Player") && explodeOnTouch) Explode();
     }

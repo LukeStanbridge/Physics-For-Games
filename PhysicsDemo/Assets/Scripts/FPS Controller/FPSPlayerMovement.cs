@@ -36,7 +36,8 @@ public class FPSPlayerMovement : MonoBehaviour
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
-    bool grounded;
+    public bool grounded;
+    public bool canDash;
 
     [Header("Slope Handling")]
     public float maxSlopeAngle;
@@ -74,6 +75,7 @@ public class FPSPlayerMovement : MonoBehaviour
         readyToJump = true;
 
         startYScale = transform.localScale.y;
+        canDash = true;
     }
 
     private void Update()
@@ -161,6 +163,7 @@ public class FPSPlayerMovement : MonoBehaviour
         {
             state = MovementState.walking;
             desiredMoveSpeed = walkSpeed;
+            canDash = true;
         }
 
         // Mode - Air
@@ -288,6 +291,7 @@ public class FPSPlayerMovement : MonoBehaviour
         readyToJump = true;
 
         exitingSlope = false;
+        canDash = true;
     }
 
     private bool OnSlope()
@@ -309,6 +313,7 @@ public class FPSPlayerMovement : MonoBehaviour
     public TextMeshProUGUI text_speed;
     public TextMeshProUGUI text_ySpeed;
     public TextMeshProUGUI text_mode;
+    public TextMeshProUGUI text_health;
     private void TextStuff()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -324,6 +329,7 @@ public class FPSPlayerMovement : MonoBehaviour
         //text_ySpeed.SetText("YSpeed: " + Round(yVel, 0) + " / " + yMax);
 
         text_mode.SetText(state.ToString());
+        text_health.SetText(health.ToString());
     }
 
     public static float Round(float value, int digits)

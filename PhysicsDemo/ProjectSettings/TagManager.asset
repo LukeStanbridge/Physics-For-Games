@@ -7,6 +7,7 @@ TagManager:
   - Bullet
   - Enemy
   - Ragdoll
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Ragdoll
   - WhatIsTower
   - WreckingBall
-  - 
+  - Ground
   - 
   - 
   - 

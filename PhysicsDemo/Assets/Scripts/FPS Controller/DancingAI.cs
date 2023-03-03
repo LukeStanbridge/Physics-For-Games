@@ -8,6 +8,7 @@ public class DancingAI : MonoBehaviour
     //assignables
     public LayerMask wreckingBall;
     public Ragdoll ragdoll;
+    public GameObject explosion;
 
     //patrolling
     private Animator anim;
@@ -27,7 +28,7 @@ public class DancingAI : MonoBehaviour
             if (enemies[i].gameObject.layer == 11)
             {
                 this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                Invoke(nameof(Ragdoll), 1f);
+                Invoke(nameof(Ragdoll), 0.5f);
             }
         }
     }
@@ -41,12 +42,17 @@ public class DancingAI : MonoBehaviour
 
     private void DestroyEnemy()
     {
-        Destroy(gameObject, 10f);
+        Destroy(gameObject, 4f);
     }
-
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 20);
+    }
+    
+    private void Explode()
+    {
+        if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
     }
 }

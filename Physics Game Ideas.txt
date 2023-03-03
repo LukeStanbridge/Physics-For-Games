@@ -1,16 +1,8 @@
 UI
 Score
 Timer
-Alternmate Fire Modes
 Alternate guns
-Weapon Sway/Recoil
 Player Health display
-Fix enemy bullets hitting player
 Fix muzzle flash movement
-Fix constant dash in mid air
 
 Dave / GameDevelopment YouTube Channel - https://www.youtube.com/@davegamedevelopment/videos
-
-Weapon Sway - https://www.youtube.com/watch?v=45ssV6CEgoU&list=PLrMEhC9sAD1ya9RFdnjFUL1foVlZjRkE7&index=4
-Weapon Recoil - https://www.youtube.com/watch?v=6hyQ2rPkMDY&list=PLrMEhC9sAD1ya9RFdnjFUL1foVlZjRkE7&index=6
-Physics-based cannon - https://www.youtube.com/watch?v=xHYmUGyCwQU

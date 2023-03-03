@@ -41,7 +41,7 @@ public class Dashing : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(dashKey))
+        if (Input.GetKeyDown(dashKey) && pm.canDash)
             Dash();
 
         if (dashCdTimer > 0)
@@ -50,6 +50,7 @@ public class Dashing : MonoBehaviour
 
     private void Dash()
     {
+        
         if (dashCdTimer > 0) return;
         else dashCdTimer = dashCd;
 
@@ -96,6 +97,9 @@ public class Dashing : MonoBehaviour
 
         if (disableGravity)
             rb.useGravity = true;
+
+        if(!pm.grounded) pm.canDash = false;
+ 
     }
 
     private Vector3 GetDirection(Transform forwardT)
