@@ -132,6 +132,8 @@ public class Swinging : MonoBehaviour
 
     private void OdmGearMovement()
     {
+        if (Input.GetKey(KeyCode.LeftShift)) StopSwing();
+
         if (predictionHit.point.y < pm.transform.position.y) StopSwing();
         // right
         if (Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * horizontalThrustForce * Time.deltaTime);

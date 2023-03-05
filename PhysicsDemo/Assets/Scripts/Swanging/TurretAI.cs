@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -19,6 +20,7 @@ public class TurretAI : MonoBehaviour
     public GameObject cannon;
 
     //States
+    public float attackForce;
     public float attackRange;
     public bool playerInAttackRange;
 
@@ -43,7 +45,7 @@ public class TurretAI : MonoBehaviour
         {
             ///Attack code here
             Rigidbody rb = Instantiate(projectile, AttackPoint.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(AttackPoint.transform.forward * 20f, ForceMode.Impulse);
+            rb.AddForce(AttackPoint.transform.forward * attackForce, ForceMode.Impulse);
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);

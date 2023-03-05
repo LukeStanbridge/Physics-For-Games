@@ -8,6 +8,7 @@ public class CustomBullet : MonoBehaviour
     public Rigidbody rb;
     public GameObject explosion;
     public LayerMask whatIsEnemies;
+    public GameObject ignore;
 
     //stats
     [Range(0f, 1f)]
@@ -39,9 +40,12 @@ public class CustomBullet : MonoBehaviour
         //when to explode
         if (collisons > maxCollisions) Explode();
 
-        //count down lifetime
-        maxLifetime -= Time.deltaTime;
-        if (maxLifetime <= 0f) Explode();
+        //count down lifetime when not in slow mo
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            maxLifetime -= Time.deltaTime;
+            if (maxLifetime <= 0f) Explode();
+        }
     }
 
     private void Explode()
@@ -84,7 +88,7 @@ public class CustomBullet : MonoBehaviour
         }
 
         //add a little delay, just to make verything works okay
-        Invoke("Delay", 0.05f);
+        Invoke("Delay", 0.01f);
     }
 
     private void Delay()
@@ -100,13 +104,31 @@ public class CustomBullet : MonoBehaviour
         collisons++;
 
         //explode if bullet hits enemy directly and explodeOnTouch is activated
-        if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
+        if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
+        {
+            Explode();
+            return;
+        }
 
-        if (collision.collider.gameObject.layer == 8 && explodeOnImpact) Explode();
-        if (collision.collider.gameObject.layer == 9 && explodeOnImpact) Explode();
+        if (collision.collider.gameObject.layer == 8 && explodeOnImpact)
+        {
+            Explode();
+            return;
+        }
+        if (collision.collider.gameObject.layer == 9 && explodeOnImpact)
+        {
+            Explode();
+            return;
+        }
 
-        if (collision.collider.CompareTag("Player") && explodeOnTouch) Explode();
-
+        if (ignore != null)
+        {
+            if (collision.collider.CompareTag("Player") && explodeOnTouch && collision.collider.tag != ignore.tag)
+            {
+                Explode();
+                return;
+            }
+        }
     }
 
     private void Setup()

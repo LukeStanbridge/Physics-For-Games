@@ -117,11 +117,17 @@ public class FPSProjectileGun : MonoBehaviour
         //Invoke resetShot function (if not already invoked), with your timeBetweenShooting
         if (allowInvoke)
         {
-            Invoke("ResetShot", timeBetweenShooting);
-            allowInvoke = false;
-
-            ////Add recoil to player (should only be called once)
-            //playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                Invoke("ResetShot", timeBetweenShooting / 10);
+                allowInvoke = false;
+            }
+            else
+            {
+                Invoke("ResetShot", timeBetweenShooting);
+                allowInvoke = false;
+            }
+            
         }
 
         //if more than one bulletsPerTap make sure to repeat shoot function

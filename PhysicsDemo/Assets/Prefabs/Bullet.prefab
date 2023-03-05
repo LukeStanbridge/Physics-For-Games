@@ -133,6 +133,7 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 8
+  ignore: {fileID: 4518658003492088398, guid: fa71c350c0c528a47a4cc36cb500c37d, type: 3}
   bounciness: 0
   useGravity: 0
   explosionDamage: 30

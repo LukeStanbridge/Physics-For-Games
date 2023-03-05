@@ -17,6 +17,7 @@ public class PlayerCam : MonoBehaviour
         transform.rotation = Quaternion.identity;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Time.timeScale = 1.0f;
     }
 
     private void Update()
@@ -27,6 +28,14 @@ public class PlayerCam : MonoBehaviour
 
         yRotation += mouseX;
         xRotation -= mouseY;
+
+        //increase speed of cam movement while in combat mode
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            yRotation += mouseX * 5;
+            xRotation -= mouseY * 5;
+        }
+
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //rotate cam and orientation

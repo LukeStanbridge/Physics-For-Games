@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -149,7 +151,7 @@ public class PlayerController : MonoBehaviour
     private void StateHandler()
     {
         // Mode - Swinging
-        if (swinging)
+        if (swinging && !Input.GetKey(KeyCode.LeftShift))
         {
             state = MovementState.swinging;
             moveSpeed = swingSpeed;
@@ -319,6 +321,9 @@ public class PlayerController : MonoBehaviour
 
     public TextMeshProUGUI text_speed;
     public TextMeshProUGUI text_mode;
+    public TextMeshProUGUI text_health;
+    public TextMeshProUGUI gameOver;
+    public Button restart;
     private void TextStuff()
     {
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
@@ -330,6 +335,22 @@ public class PlayerController : MonoBehaviour
             text_speed.SetText("Speed: " + Round(flatVel.magnitude, 1) + " / " + Round(moveSpeed, 1));
 
         text_mode.SetText(state.ToString());
+        text_health.SetText(health.ToString());
+
+        if (health <= 0)
+        {
+            Time.timeScale = 0;
+            health = 0;
+            gameOver.gameObject.SetActive(true);//game over
+            restart.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene("sWANGing");
     }
 
     public static float Round(float value, int digits)
@@ -341,8 +362,6 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-
-        //if (health <= 0) gameOver.gameObject.SetActive(true);//game over
     }
 
     #endregion
