@@ -1,8 +1,9 @@
 UI
 Score
 Timer
-Alternate guns
 Player Health display
 Fix muzzle flash movement
 
 Dave / GameDevelopment YouTube Channel - https://www.youtube.com/@davegamedevelopment/videos
+Grappling Hook Animation - https://www.youtube.com/watch?v=8nENcDnxeVE&ab_channel=Affax
+Kinematic Equations - https://www.youtube.com/watch?v=IvT8hjy6q4o&ab_channel=SebastianLague

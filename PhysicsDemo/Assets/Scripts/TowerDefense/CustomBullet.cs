@@ -54,14 +54,19 @@ public class CustomBullet : MonoBehaviour
         for (int i = 0; i < enemies.Length; i++)
         {
             //Get component of enemy and call Take Damage
-            if(enemies[i].GetComponent<EnemyAI>()) enemies[i].GetComponent<EnemyAI>().TakeDamage(explosionDamage);
-            if(enemies[i].GetComponent<FPSPlayerMovement>()) enemies[i].GetComponent<FPSPlayerMovement>().TakeDamage(explosionDamage);
+            if(enemies[i].GetComponent<TurretAI>()) enemies[i].GetComponent<TurretAI>().TakeDamage(explosionDamage);
+            if (enemies[i].GetComponent<PlayerController>())
+            {
+                enemies[i].GetComponent<PlayerController>().TakeDamage(explosionDamage);
+            }
 
             //add explosion force if enemy has rigidbody
             if (enemies[i].GetComponent<Rigidbody>() && !enemies[i].gameObject.CompareTag("Player"))
             {
                 enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange, explosionUpwards);
             }
+
+            if (enemies[i].GetComponent<Ragdoll>()) enemies[i].GetComponent<Ragdoll>().ToggleRagdoll(true);
 
             Collider[] ragdollColliders = Physics.OverlapSphere(transform.position, explosionRange);
             foreach (Collider c in ragdollColliders)
@@ -98,8 +103,10 @@ public class CustomBullet : MonoBehaviour
         if (collision.collider.CompareTag("Enemy") && explodeOnTouch) Explode();
 
         if (collision.collider.gameObject.layer == 8 && explodeOnImpact) Explode();
+        if (collision.collider.gameObject.layer == 9 && explodeOnImpact) Explode();
 
         if (collision.collider.CompareTag("Player") && explodeOnTouch) Explode();
+
     }
 
     private void Setup()

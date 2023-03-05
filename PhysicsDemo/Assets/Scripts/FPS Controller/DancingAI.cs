@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class DancingAI : MonoBehaviour
 {
     //assignables
-    public LayerMask wreckingBall;
+    //public LayerMask wreckingBall;
     public Ragdoll ragdoll;
     public GameObject explosion;
 
@@ -22,15 +22,15 @@ public class DancingAI : MonoBehaviour
     {
         anim.Play("Hip Hop Dancing");
 
-        Collider[] enemies = Physics.OverlapSphere(transform.position, 20, wreckingBall);
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            if (enemies[i].gameObject.layer == 11)
-            {
-                this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
-                Invoke(nameof(Ragdoll), 0.5f);
-            }
-        }
+        //Collider[] enemies = Physics.OverlapSphere(transform.position, 20, wreckingBall);
+        //for (int i = 0; i < enemies.Length; i++)
+        //{
+        //    if (enemies[i].gameObject.layer == 11)
+        //    {
+        //        this.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        //        Invoke(nameof(Ragdoll), 0.5f);
+        //    }s
+        //}
     }
 
     public void Ragdoll()

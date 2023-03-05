@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6237049982408537902}
   - component: {fileID: 790753657526060058}
   m_Layer: 6
-  m_Name: Bullet
+  m_Name: EnemyBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -132,13 +132,13 @@ MonoBehaviour:
   explosion: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
   whatIsEnemies:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 128
   bounciness: 0
   useGravity: 0
   explosionDamage: 30
-  explosionRange: 0.3
-  explosionForce: 300
-  explosionUpwards: 200
+  explosionRange: 0.2
+  explosionForce: 0
+  explosionUpwards: 0
   maxCollisions: 1
   maxLifetime: 2
   explodeOnTouch: 1
