@@ -11,14 +11,10 @@ Kinematic Equations - https://www.youtube.com/watch?v=IvT8hjy6q4o&ab_channel=Seb
 
 ***BUGS/TO DO***
 - Explode on ragdoll needs to be better
-- No Explosion when turret destroyed
-- Projectiles not exploding on player impact properly
+- Projectiles not exploding on player impact properly, Fix collision system
 - Projectiles need tuning
-- Add cool grapple animation
-- Fix enemy health and collision system
 - Speed effects while swinging
 - particles for shooting
-- health bars for enemies
 - health bar for player
 - add timer
 - add general goal and points

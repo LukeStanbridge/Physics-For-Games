@@ -136,7 +136,7 @@ MonoBehaviour:
   ignore: {fileID: 4518658003492088398, guid: fa71c350c0c528a47a4cc36cb500c37d, type: 3}
   bounciness: 0
   useGravity: 0
-  explosionDamage: 30
+  explosionDamage: 10
   explosionRange: 0.3
   explosionForce: 300
   explosionUpwards: 200
@@ -195,7 +195,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.81760985
+        value: 0.40834624
         inSlope: 0
         outSlope: 0
         tangentMode: 0

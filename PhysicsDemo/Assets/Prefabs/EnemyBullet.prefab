@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8735645949579112519}
   - component: {fileID: 8735645949579112518}
   - component: {fileID: 8735645949579112517}
-  - component: {fileID: 8735645949579112516}
   - component: {fileID: 8735645949579112539}
+  - component: {fileID: 8735645949579112516}
   - component: {fileID: 6237049982408537902}
   - component: {fileID: 790753657526060058}
   m_Layer: 6
@@ -87,19 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &8735645949579112516
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8735645949579112538}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &8735645949579112539
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -116,6 +103,19 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!135 &8735645949579112516
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8735645949579112538}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6237049982408537902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 128
-  ignore: {fileID: 0}
+  ignore: {fileID: 4487783949076941144, guid: a285411a6d7218743ba326f88c87c0f3, type: 3}
   bounciness: 0
   useGravity: 0
   explosionDamage: 30
@@ -143,7 +143,6 @@ MonoBehaviour:
   maxCollisions: 1
   maxLifetime: 2
   explodeOnTouch: 1
-  explodeOnImpact: 1
 --- !u!96 &790753657526060058
 TrailRenderer:
   serializedVersion: 2

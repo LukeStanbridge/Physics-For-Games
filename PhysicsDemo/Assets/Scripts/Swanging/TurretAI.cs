@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class TurretAI : MonoBehaviour
 {
     public Transform player;
     public Transform AttackPoint;
+    public Slider healthBar;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -18,6 +19,7 @@ public class TurretAI : MonoBehaviour
     bool alreadyAttacked;
     public GameObject projectile;
     public GameObject cannon;
+    public GameObject explode;
 
     //States
     public float attackForce;
@@ -27,6 +29,7 @@ public class TurretAI : MonoBehaviour
     private void Awake()
     {
         player = GameObject.Find("PlayerObj").transform;
+        healthBar.value = health;
     }
 
     private void Update()
@@ -34,6 +37,7 @@ public class TurretAI : MonoBehaviour
         //Check for sight and attack range
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
         if (playerInAttackRange) AttackPlayer();
+        healthBar.transform.LookAt(player.position);
     }
 
     private void AttackPlayer()
@@ -59,11 +63,13 @@ public class TurretAI : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        healthBar.value -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.2f);
     }
     private void DestroyEnemy()
     {
+        Instantiate(explode, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

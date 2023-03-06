@@ -25,7 +25,7 @@ public class CustomBullet : MonoBehaviour
     public int maxCollisions;
     public float maxLifetime;
     public bool explodeOnTouch = true;
-    public bool explodeOnImpact = true;
+    //public bool explodeOnImpact = true;
 
     private int collisons;
     private PhysicMaterial physicsMat;
@@ -110,12 +110,12 @@ public class CustomBullet : MonoBehaviour
             return;
         }
 
-        if (collision.collider.gameObject.layer == 8 && explodeOnImpact)
+        if (collision.collider.gameObject.layer == 8 && explodeOnTouch)
         {
             Explode();
             return;
         }
-        if (collision.collider.gameObject.layer == 9 && explodeOnImpact)
+        if (collision.collider.gameObject.layer == 9 && explodeOnTouch)
         {
             Explode();
             return;

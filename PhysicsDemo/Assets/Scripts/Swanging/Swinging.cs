@@ -5,15 +5,15 @@ using UnityEngine;
 public class Swinging : MonoBehaviour
 {
     [Header("References")]
-    public LineRenderer lr;
+    //public LineRenderer lr;
     public Transform gunTip, cam, player;
     public LayerMask whatIsGrappleable;
     public PlayerController pm;
 
     [Header("Swinging")]
     private float maxSwingDistance = 25f;
-    private Vector3 swingPoint;
-    private SpringJoint joint;
+    public Vector3 swingPoint;
+    public SpringJoint joint;
 
     [Header("OdmGear")]
     public Transform orientation;
@@ -44,10 +44,10 @@ public class Swinging : MonoBehaviour
         if (joint != null) OdmGearMovement();
     }
 
-    private void LateUpdate()
-    {
-        DrawRope();
-    }
+    //private void LateUpdate()
+    //{
+    //    DrawRope();
+    //}
 
     private void CheckForSwingPoints()
     {
@@ -117,15 +117,15 @@ public class Swinging : MonoBehaviour
         joint.damper = 7f;
         joint.massScale = 4.5f;
 
-        lr.positionCount = 2;
-        currentGrapplePosition = gunTip.position;
+        //lr.positionCount = 2;
+        //currentGrapplePosition = gunTip.position;
     }
 
     public void StopSwing()
     {
         pm.swinging = false;
 
-        lr.positionCount = 0;
+        //lr.positionCount = 0;
 
         Destroy(joint);
     }
@@ -164,17 +164,17 @@ public class Swinging : MonoBehaviour
         }
     }
 
-    private Vector3 currentGrapplePosition;
+    //private Vector3 currentGrapplePosition;
 
-    private void DrawRope()
-    {
-        // if not grappling, don't draw rope
-        if (!joint) return;
+    //private void DrawRope()
+    //{
+    //    // if not grappling, don't draw rope
+    //    if (!joint) return;
 
-        currentGrapplePosition =
-            Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 8f);
+    //    currentGrapplePosition =
+    //        Vector3.Lerp(currentGrapplePosition, swingPoint, Time.deltaTime * 8f);
 
-        lr.SetPosition(0, gunTip.position);
-        lr.SetPosition(1, currentGrapplePosition);
-    }
+    //    lr.SetPosition(0, gunTip.position);
+    //    lr.SetPosition(1, currentGrapplePosition);
+    //}
 }
