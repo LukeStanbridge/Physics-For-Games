@@ -43,6 +43,7 @@ public class CustomBullet : MonoBehaviour
         //count down lifetime when not in slow mo
         if (!Input.GetKey(KeyCode.LeftShift))
         {
+            maxLifetime = maxLifetime * 10f;
             maxLifetime -= Time.deltaTime;
             if (maxLifetime <= 0f) Explode();
         }
@@ -88,7 +89,8 @@ public class CustomBullet : MonoBehaviour
         }
 
         //add a little delay, just to make verything works okay
-        Invoke("Delay", 0.01f);
+        //Invoke("Delay", 0.01f);
+        Delay();
     }
 
     private void Delay()
@@ -98,8 +100,10 @@ public class CustomBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //dont count collisons with other bullets
-        if (collision.collider.CompareTag("Bullet")) return;
+        if (collision.collider.CompareTag("Bullet") && explodeOnTouch)
+        {
+            return;
+        }
 
         collisons++;
 
@@ -110,12 +114,12 @@ public class CustomBullet : MonoBehaviour
             return;
         }
 
-        if (collision.collider.gameObject.layer == 8 && explodeOnTouch)
+        if (collision.collider.CompareTag("Ground") && explodeOnTouch)
         {
             Explode();
             return;
         }
-        if (collision.collider.gameObject.layer == 9 && explodeOnTouch)
+        if (collision.collider.CompareTag("Ragdoll") && explodeOnTouch)
         {
             Explode();
             return;
