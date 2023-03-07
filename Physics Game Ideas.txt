@@ -1,23 +1,12 @@
-UI
-Score
-Timer
-Player Health display
-Fix muzzle flash movement
-
 Dave / GameDevelopment YouTube Channel - https://www.youtube.com/@davegamedevelopment/videos
 Grappling Hook Animation - https://www.youtube.com/watch?v=8nENcDnxeVE&ab_channel=Affax
 Kinematic Equations - https://www.youtube.com/watch?v=IvT8hjy6q4o&ab_channel=SebastianLague
 
 
 ***BUGS/TO DO***
-- Explode on ragdoll needs to be better
-- Projectiles not exploding on player impact properly, Fix collision system
-- Projectiles need tuning
+- Explode on ragdoll could be better
+- Tune enemy and player projectiles
 - Speed effects while swinging
 - particles for shooting
-- health bar for player
-- add timer
 - add general goal and points
 - map out a better level
-- restrict turret attack range so it doesn't shoot below itself/ or make 360 directional turret
-- tune enemy range and bullet speed

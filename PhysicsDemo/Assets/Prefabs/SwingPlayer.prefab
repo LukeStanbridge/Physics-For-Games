@@ -248,14 +248,19 @@ MonoBehaviour:
   cam: {fileID: 0}
   grappleFov: 75
   orientation: {fileID: 4518658002825717660}
-  health: 200
+  health: 100
+  bulletTime: 1
+  sloMoTimer: 1
+  sloMoTimeReset: 1
   state: 0
   swinging: 0
   text_speed: {fileID: 0}
   text_mode: {fileID: 0}
-  text_health: {fileID: 0}
   gameOver: {fileID: 0}
+  text_timer: {fileID: 0}
   restart: {fileID: 0}
+  healthBar: {fileID: 0}
+  bulletTimeBar: {fileID: 0}
 --- !u!114 &4518658003492088395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +282,9 @@ MonoBehaviour:
   pm: {fileID: 4518658003492088388}
   swingPoint: {x: 0, y: 0, z: 0}
   joint: {fileID: 0}
+  swingCooldown: 0.1
+  swingCooldownReset: 0.1
+  canSwing: 1
   orientation: {fileID: 4518658002825717660}
   rb: {fileID: 4518658003492088397}
   horizontalThrustForce: 2000

@@ -119,7 +119,7 @@ public class FPSProjectileGun : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                Invoke("ResetShot", timeBetweenShooting / 10);
+                Invoke("ResetShot", timeBetweenShooting);
                 allowInvoke = false;
             }
             else

@@ -13,6 +13,9 @@ public class Swinging : MonoBehaviour
     private float maxSwingDistance = 25f;
     public Vector3 swingPoint;
     public SpringJoint joint;
+    public float swingCooldown;
+    public float swingCooldownReset;
+    public bool canSwing = true;
 
     [Header("OdmGear")]
     public Transform orientation;
@@ -34,8 +37,22 @@ public class Swinging : MonoBehaviour
     {
         if (!Input.GetKey(KeyCode.LeftShift))
         {
-            if (Input.GetKeyDown(swingKey)) StartSwing();
-            if (Input.GetKeyUp(swingKey)) StopSwing();
+            if (Input.GetKeyDown(swingKey) && canSwing) StartSwing();
+            if (Input.GetKeyUp(swingKey))
+            {
+                swingCooldown = swingCooldownReset;
+                canSwing = false;
+                StopSwing(); 
+            }
+
+            if (!canSwing)
+            {
+                swingCooldown -= Time.deltaTime;
+                if (swingCooldown <= 0)
+                {
+                    canSwing = true;
+                }
+            }
         }
 
         CheckForSwingPoints();

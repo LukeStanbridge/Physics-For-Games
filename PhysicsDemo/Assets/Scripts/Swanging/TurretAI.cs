@@ -36,7 +36,7 @@ public class TurretAI : MonoBehaviour
     {
         //Check for sight and attack range
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-        if (playerInAttackRange) AttackPlayer();
+        if (playerInAttackRange && player.transform.position.y > (transform.position.y - 2.5)) AttackPlayer();
         healthBar.transform.LookAt(player.position);
     }
 

@@ -113,7 +113,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 2
+  m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 2
 --- !u!114 &6237049982408537902
@@ -137,12 +137,13 @@ MonoBehaviour:
   bounciness: 0
   useGravity: 0
   explosionDamage: 10
-  explosionRange: 0.3
+  explosionRange: 2
   explosionForce: 300
-  explosionUpwards: 200
+  explosionUpwards: 1000
   maxCollisions: 1
   maxLifetime: 2
   explodeOnTouch: 1
+  collisons: 0
 --- !u!96 &790753657526060058
 TrailRenderer:
   serializedVersion: 2

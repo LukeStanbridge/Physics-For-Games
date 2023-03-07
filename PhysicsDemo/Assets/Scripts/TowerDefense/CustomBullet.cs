@@ -27,7 +27,7 @@ public class CustomBullet : MonoBehaviour
     public bool explodeOnTouch = true;
     //public bool explodeOnImpact = true;
 
-    private int collisons;
+    public int collisons;
     private PhysicMaterial physicsMat;
 
     private void Start()
@@ -37,8 +37,8 @@ public class CustomBullet : MonoBehaviour
 
     private void Update()
     {
-        //when to explode
-        if (collisons > maxCollisions) Explode();
+        ////when to explode
+        //if (collisons > maxCollisions) Explode();
 
         //count down lifetime when not in slow mo
         if (!Input.GetKey(KeyCode.LeftShift))
@@ -54,43 +54,28 @@ public class CustomBullet : MonoBehaviour
         //instantiate explosion
         if (explosion != null) Instantiate(explosion, transform.position, Quaternion.identity);
 
+        //Disable visuals on impact
+        this.GetComponent<MeshRenderer>().enabled = false;
+        this.GetComponent<TrailRenderer>().enabled = false;
+
         //check for enemies
         Collider[] enemies = Physics.OverlapSphere(transform.position, explosionRange, whatIsEnemies);
         for (int i = 0; i < enemies.Length; i++)
         {
             //Get component of enemy and call Take Damage
-            if(enemies[i].GetComponent<TurretAI>()) enemies[i].GetComponent<TurretAI>().TakeDamage(explosionDamage);
-            if (enemies[i].GetComponent<PlayerController>())
-            {
-                enemies[i].GetComponent<PlayerController>().TakeDamage(explosionDamage);
-            }
+            if (enemies[i].GetComponent<TurretAI>()) enemies[i].GetComponent<TurretAI>().TakeDamage(explosionDamage); // damage turrets
+            if (enemies[i].GetComponent<PlayerController>()) enemies[i].GetComponent<PlayerController>().TakeDamage(explosionDamage); // damage player
 
-            //add explosion force if enemy has rigidbody
-            if (enemies[i].GetComponent<Rigidbody>() && !enemies[i].gameObject.CompareTag("Player"))
+            //add explosion force to dancing enemies
+            if (enemies[i].GetComponent<DancingAI>())
             {
                 enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRange, explosionUpwards);
+                enemies[i].GetComponent<Ragdoll>().ToggleRagdoll(true);
             }
-
-            if (enemies[i].GetComponent<Ragdoll>()) enemies[i].GetComponent<Ragdoll>().ToggleRagdoll(true);
-
-            Collider[] ragdollColliders = Physics.OverlapSphere(transform.position, explosionRange);
-            foreach (Collider c in ragdollColliders)
-            {
-                if (c.gameObject.tag == "Ragdoll")
-                {
-                    Rigidbody rb = c.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        rb.AddExplosionForce(explosionForce, transform.position, explosionRange, explosionUpwards);
-                    }
-                }
-            }
-
         }
 
         //add a little delay, just to make verything works okay
-        //Invoke("Delay", 0.01f);
-        Delay();
+        Invoke("Delay", 0.5f);
     }
 
     private void Delay()
@@ -100,39 +85,13 @@ public class CustomBullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Bullet") && explodeOnTouch)
+        if (collision.collider.CompareTag("Bullet"))
         {
             return;
         }
 
+        if (collisons < 1) Explode();
         collisons++;
-
-        //explode if bullet hits enemy directly and explodeOnTouch is activated
-        if (collision.collider.CompareTag("Enemy") && explodeOnTouch)
-        {
-            Explode();
-            return;
-        }
-
-        if (collision.collider.CompareTag("Ground") && explodeOnTouch)
-        {
-            Explode();
-            return;
-        }
-        if (collision.collider.CompareTag("Ragdoll") && explodeOnTouch)
-        {
-            Explode();
-            return;
-        }
-
-        if (ignore != null)
-        {
-            if (collision.collider.CompareTag("Player") && explodeOnTouch && collision.collider.tag != ignore.tag)
-            {
-                Explode();
-                return;
-            }
-        }
     }
 
     private void Setup()

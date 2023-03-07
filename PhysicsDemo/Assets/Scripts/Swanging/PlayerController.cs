@@ -52,6 +52,10 @@ public class PlayerController : MonoBehaviour
 
     Vector3 moveDirection;
     public float health;
+    private float timer = 0;
+    public bool bulletTime = true;
+    public float sloMoTimer;
+    public float sloMoTimeReset;
 
     Rigidbody rb;
 
@@ -75,6 +79,8 @@ public class PlayerController : MonoBehaviour
         readyToJump = true;
 
         startYScale = transform.localScale.y;
+
+        healthBar.value = health;
     }
 
     private void Update()
@@ -82,20 +88,25 @@ public class PlayerController : MonoBehaviour
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && bulletTime)
         {
             swinging = false;
-            if (Time.timeScale == 1)
+            sloMoTimer -= Time.deltaTime;
+            bulletTimeBar.value = sloMoTimer;
+            if (sloMoTimer <= 0) bulletTime = false;
+            if (bulletTime)
             {
-                //Time.fixedDeltaTime = Time.fixedDeltaTime / 2;
                 Time.timeScale = 0.1f;
             }
+            else Time.timeScale = 1;
         }
         else if (Input.GetKeyUp(KeyCode.LeftShift))
         {
+            sloMoTimer = sloMoTimeReset;
+            bulletTime = true;
+            bulletTimeBar.value = sloMoTimeReset;
             if (Time.timeScale < 1)
             {
-                //Time.fixedDeltaTime = 1;
                 Time.timeScale = 1;
             }
             
@@ -321,11 +332,14 @@ public class PlayerController : MonoBehaviour
 
     public TextMeshProUGUI text_speed;
     public TextMeshProUGUI text_mode;
-    public TextMeshProUGUI text_health;
     public TextMeshProUGUI gameOver;
+    public TextMeshProUGUI text_timer;
     public Button restart;
+    public Slider healthBar;
+    public Slider bulletTimeBar;
     private void TextStuff()
     {
+        timer += Time.deltaTime;
         Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
         if (OnSlope())
@@ -335,7 +349,9 @@ public class PlayerController : MonoBehaviour
             text_speed.SetText("Speed: " + Round(flatVel.magnitude, 1) + " / " + Round(moveSpeed, 1));
 
         text_mode.SetText(state.ToString());
-        text_health.SetText(health.ToString());
+
+        float rounded = Mathf.Round(timer * 100.0f) / 100.0f;
+        text_timer.SetText(rounded.ToString());
 
         if (health <= 0)
         {
@@ -362,6 +378,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
+        healthBar.value -= damage;
     }
 
     #endregion
