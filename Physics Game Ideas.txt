@@ -4,9 +4,17 @@ Kinematic Equations - https://www.youtube.com/watch?v=IvT8hjy6q4o&ab_channel=Seb
 
 
 ***BUGS/TO DO***
+
 - Explode on ragdoll could be better
 - Tune enemy and player projectiles
 - Speed effects while swinging
 - particles for shooting
 - add general goal and points
 - map out a better level
+
+***Computer Graphics Additions***
+
+- https://www.youtube.com/watch?v=91XXV6WtEbQ Water Shader
+- https://www.youtube.com/watch?v=bAVCTR23CTw Electricty Trail
+- https://www.youtube.com/watch?v=40m_HUENh3E Lightning Strike
+- https://www.youtube.com/watch?v=gRq-IdShxpU Unity Water Shader
