@@ -137,6 +137,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1144109017022314268}
     m_Modifications:
+    - target: {fileID: 4487783949050082772, guid: a285411a6d7218743ba326f88c87c0f3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 4487783949076941144, guid: a285411a6d7218743ba326f88c87c0f3, type: 3}
       propertyPath: m_Name
       value: TurretEnemy (1)

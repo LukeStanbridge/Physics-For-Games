@@ -13,8 +13,7 @@ Kinematic Equations - https://www.youtube.com/watch?v=IvT8hjy6q4o&ab_channel=Seb
 - map out a better level
 
 ***Computer Graphics Additions***
-
-- https://www.youtube.com/watch?v=91XXV6WtEbQ Water Shader
+- Low Poly Water Shader (https://www.youtube.com/watch?v=78WCzTVmc28)
 - https://www.youtube.com/watch?v=bAVCTR23CTw Electricty Trail
 - https://www.youtube.com/watch?v=40m_HUENh3E Lightning Strike
-- https://www.youtube.com/watch?v=gRq-IdShxpU Unity Water Shader
+
