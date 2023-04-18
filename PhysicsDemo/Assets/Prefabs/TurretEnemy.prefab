@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 4487783947914900998}
   m_Layer: 3
   m_Name: Base
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 4487783948797438825}
   m_Layer: 3
   m_Name: Pivot
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 4487783949050082773}
   m_Layer: 3
   m_Name: Cannon
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -526,7 +526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcc227a25fc4b114bb559f8dc22eed70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4518658003492088396, guid: fa71c350c0c528a47a4cc36cb500c37d, type: 3}
+  player: {fileID: 0}
   AttackPoint: {fileID: 4487783948946370402}
   healthBar: {fileID: 1177571339424585559}
   whatIsGround:
@@ -539,7 +539,7 @@ MonoBehaviour:
   timeBetweenAttacks: 1
   projectile: {fileID: 8735645949579112538, guid: 5b6ce612a4df4114c831ba51e7736e2d, type: 3}
   cannon: {fileID: 4487783949050082768}
-  explode: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+  explode: {fileID: 7986968943458615477, guid: f4f55d21e9a98e342b5ff663e49fe18a, type: 3}
   attackForce: 180
   attackRange: 30
   playerInAttackRange: 0
@@ -553,8 +553,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 1.17
-  m_Height: 4.09
+  m_Radius: 1.13
+  m_Height: 2.8
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5554602125827974836

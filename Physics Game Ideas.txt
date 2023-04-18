@@ -13,7 +13,8 @@ Kinematic Equations - https://www.youtube.com/watch?v=IvT8hjy6q4o&ab_channel=Seb
 - map out a better level
 
 ***Computer Graphics Additions***
-- Low Poly Water Shader (https://www.youtube.com/watch?v=78WCzTVmc28)
-- https://www.youtube.com/watch?v=bAVCTR23CTw Electricty Trail
-- https://www.youtube.com/watch?v=40m_HUENh3E Lightning Strike
+Pixelate Charcter - https://www.youtube.com/watch?v=siiqnXA156Y
+Pixel art effects - https://www.youtube.com/watch?v=JZDlCuIpq9I
+Pixelation - https://www.youtube.com/watch?v=kTZf1ePy86w
+Outline Shader - https://www.youtube.com/watch?v=X-kaX_8bYRc
 
