@@ -1118,6 +1118,7 @@ GameObject:
   - component: {fileID: 1858659190441960853}
   - component: {fileID: 2761587516055100847}
   - component: {fileID: -3609203063270340156}
+  - component: {fileID: 1119761289}
   m_Layer: 3
   m_Name: DancingEnemy
   m_TagString: Enemy
@@ -1151,7 +1152,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2761587516055100855}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 2585f144b33aa17459817c761e4e0858, type: 3}
   m_Controller: {fileID: 9100000, guid: edca93c7abca1fd479d3e0b3f50898b3, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -1202,7 +1203,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdoll: {fileID: 1858659190441960853}
-  explosion: {fileID: 0}
+  whatDoing: {fileID: 0}
+  stopDancing: {fileID: 0}
+  forReal: {fileID: 0}
+  weirdo: {fileID: 0}
+  problem: {fileID: 0}
+  goal: {fileID: 0}
 --- !u!54 &-3609203063270340156
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1219,6 +1225,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &1119761289
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2761587516055100855}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 7.5343, y: 5.153415, z: 11.333472}
+  m_Center: {x: -0, y: 2.076708, z: -0}
 --- !u!1 &2922108954065134240
 GameObject:
   m_ObjectHideFlags: 0
