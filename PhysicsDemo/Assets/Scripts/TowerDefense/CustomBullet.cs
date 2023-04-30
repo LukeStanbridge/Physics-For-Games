@@ -43,7 +43,7 @@ public class CustomBullet : MonoBehaviour
         //count down lifetime when not in slow mo
         if (!Input.GetKey(KeyCode.LeftShift))
         {
-            maxLifetime = maxLifetime * 10f;
+            //maxLifetime = maxLifetime * 10f;
             maxLifetime -= Time.deltaTime;
             if (maxLifetime <= 0f) Explode();
         }

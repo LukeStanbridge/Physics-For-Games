@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 8735645949579112539}
-  explosion: {fileID: 1827175828722230132, guid: 099b6826085b749409b64b730fb684a8, type: 3}
+  explosion: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c, type: 3}
   whatIsEnemies:
     serializedVersion: 2
     m_Bits: 8
@@ -141,7 +141,7 @@ MonoBehaviour:
   explosionForce: 300
   explosionUpwards: 1000
   maxCollisions: 1
-  maxLifetime: 2
+  maxLifetime: 1
   explodeOnTouch: 1
   collisons: 0
 --- !u!96 &790753657526060058

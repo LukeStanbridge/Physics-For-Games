@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LevelSetup : MonoBehaviour
@@ -10,6 +11,7 @@ public class LevelSetup : MonoBehaviour
     [SerializeField] private Transform level4;
     [SerializeField] private ParticleSystem openLevel;
     [SerializeField] private ParticleSystem closedLevel;
+    [SerializeField] private GameObject level1Text;
     private ParticleSystem level1Particles;
     private ParticleSystem level2Particles;
     private ParticleSystem level3Particles;
@@ -55,6 +57,7 @@ public class LevelSetup : MonoBehaviour
             level1.GetComponent<BoxCollider>().enabled = false;
             level2.GetComponent<BoxCollider>().enabled = true;
         }
+        if (level1Open) level1Text.gameObject.SetActive(true);
     }
 
     ParticleSystem changeParticles(Transform levelPosition)
